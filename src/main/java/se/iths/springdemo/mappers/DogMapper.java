@@ -14,11 +14,11 @@ public class DogMapper {
     }
 
     public DogDto mapp(Dog dog) {
-        return new DogDto(dog.getId(),dog.getName(),dog.getEmail());
+        return new DogDto(dog.getId(),dog.getName(),dog.getType(), dog.getWeight(), dog.getGender());
     }
 
     public Dog mapp(DogDto dogDto) {
-        return new Dog(dogDto.getId(),dogDto.getName(),dogDto.getEmail());
+        return new Dog(dogDto.getId(),dogDto.getName(),dogDto.getType(), dogDto.getWeight(), dogDto.getGender());
     }
 
     public Optional<DogDto> mapp(Optional<Dog> optionalDog) {
