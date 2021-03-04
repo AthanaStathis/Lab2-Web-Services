@@ -1,6 +1,7 @@
 package se.iths.springdemo.controllers;
 
 import org.springframework.http.HttpStatus;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import se.iths.springdemo.dtos.DogDto;
@@ -13,6 +14,7 @@ import se.iths.springdemo.services.Service;
 import java.util.List;
 
 @RestController
+//@EnableRetry
 public class DogController {
 
     private Service service;
@@ -31,9 +33,9 @@ public class DogController {
 
     @GetMapping("/dogs/{id}")
     public DogDto one(@PathVariable int id) {
-        return service.getOne(id)
+        return service.getOneDog(id)
                         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
-                        "Id " + id + " not found."));
+                        "Dog " + id + " not found."));
     }
 
 
@@ -46,33 +48,61 @@ public class DogController {
 
     @DeleteMapping("/dogs/{id}")
     public void delete(@PathVariable int id) {
-        service.delete(id);
+        service.deleteDog(id);
     }
 
 
     @PutMapping("/dogs/{id}")
     public DogDto replace(@RequestBody DogDto dogDto, @PathVariable int id) {
-        return service.replace(id, dogDto);
+        return service.replaceDog(id, dogDto);
     }
 
-    @PatchMapping("/dogs/{id}")
+
+    @PatchMapping("/dogs/{id}/type")
     public DogDto update(@RequestBody DogType dogType, @PathVariable int id) {
-        return service.update(id, dogType);
+        return service.updateDog(id, dogType);
     }
 
 
-    @PatchMapping("/dogs/{id}")
+    @PatchMapping("/dogs/{id}/weight")
     public DogDto update(@RequestBody DogWeight dogWeight, @PathVariable int id) {
-        return service.update(id, dogWeight);
+        return service.updateDog(id, dogWeight);
     }
 
-    @PatchMapping("/dogs/{id}")
+
+    @PatchMapping("/dogs/{id}/gender")
     public DogDto update(@RequestBody DogGender dogGender, @PathVariable int id) {
-        return service.update(id, dogGender);
+        return service.updateDog(id, dogGender);
     }
 
-    @PatchMapping("/dogs/{id}")
+
+    @PatchMapping("/dogs/{id}/name")
     public DogDto update(@RequestBody DogName dogName, @PathVariable int id) {
-        return service.update(id, dogName);
+        return service.updateDog(id, dogName);
     }
+
+
+
+//    @PatchMapping(value = "/dogs/{id}", params = "name")
+//    public DogDto update(@RequestBody DogName dogName, @PathVariable int id) {
+//        return service.updateDog(id, dogName);
+//    }
+
+    @GetMapping(value = "/searchdog", params = "name")
+    public List<DogDto> searchByName(@RequestParam String name) {
+        return service.getDogByName(name);
+    }
+
+    @GetMapping(value = "/searchdog", params = "type")
+    public List<DogDto> searchByType(@RequestParam String type) {
+        return service.getDogByName(type);
+    }
+
+    @GetMapping(value = "/searchdog", params = "gender")
+    public List<DogDto> searchByGender(@RequestParam String gender) {
+        return service.getDogByName(gender);
+    }
+
+
+
 }

@@ -33,11 +33,5 @@ public class DogMapper {
                 .stream()
                 .map(this::mapp)
                 .collect(Collectors.toList());
-
-        //List <PersonDto> personDtoList = new ArrayList<>();
-        //for(var person: all)
-        //    personDtoList.add(mapp(person));
-        //return personDtoList;
     }
-
 }

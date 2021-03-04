@@ -12,19 +12,26 @@ import java.util.Optional;
 public interface Service {
     List<DogDto> getAllDogs();
 
-    Optional<DogDto> getOne(int id);
+    Optional<DogDto> getOneDog(int id);
 
     DogDto createDog(DogDto dog);
 
-    void delete(int id);
+    boolean deleteDog(int id);
 
-    DogDto replace(int id, DogDto dogDto);
+    DogDto replaceDog(int id, DogDto dogDto);
 
-    DogDto update(int id, DogName dogDto);
+    DogDto updateDog(int id, DogName dogDto);
 
-    DogDto update(int id, DogType dogDto);
+    DogDto updateDog(int id, DogType dogDto);
 
-    DogDto update(int i, DogWeight dogDto);
+    DogDto updateDog(int i, DogWeight dogDto);
 
-    DogDto update(int i, DogGender dogDto);
+    DogDto updateDog(int i, DogGender dogDto);
+
+    List<DogDto> getDogGender(String gender);
+
+    List<DogDto> getDogByName(String name);
+
+    List<DogDto> getDogByType(String type);
+
 }

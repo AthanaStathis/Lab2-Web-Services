@@ -28,7 +28,7 @@ public class DogService implements Service{
 
 
     @Override
-    public Optional<DogDto> getOne(int id) {
+    public Optional<DogDto> getOneDog(int id) {
         //return personRepository.findById(id);
         return dogMapper.mapp(dogRepository.findById(id));
     }
@@ -44,13 +44,17 @@ public class DogService implements Service{
 
 
     @Override
-    public void delete(int id) {
-        dogRepository.deleteById(id);
+    public boolean deleteDog(int id) {
+        if(dogRepository.findById(id).isPresent()) {
+            dogRepository.deleteById(id);
+            return true;
+        } else
+            return false;
     }
 
 
     @Override
-    public DogDto replace(int id, DogDto dogDto) {
+    public DogDto replaceDog(int id, DogDto dogDto) {
         Optional<Dog> dog =  dogRepository.findById(id);
         if (dog.isPresent()) {
             Dog updatedDog = dog.get();
@@ -60,13 +64,13 @@ public class DogService implements Service{
         }
         else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    "Id " + id + " not found.");
+                    "Dog with id: " + id + " not found.");
         }
     }
 
 
     @Override
-    public DogDto update(int id, DogName dogDto) {
+    public DogDto updateDog(int id, DogName dogDto) {
         Optional<Dog> dog =  dogRepository.findById(id);
         if (dog.isPresent()) {
             Dog updatedDog = dog.get();
@@ -77,13 +81,13 @@ public class DogService implements Service{
         }
         else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    "Id " + id + " not found.");
+                    "Dog with id: " + id + " not found.");
         }
     }
 
 
     @Override
-    public DogDto update(int id, DogType dogDto) {
+    public DogDto updateDog(int id, DogType dogDto) {
         Optional<Dog> dog =  dogRepository.findById(id);
         if (dog.isPresent()) {
             Dog updatedDog = dog.get();
@@ -94,13 +98,13 @@ public class DogService implements Service{
         }
         else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    "Id " + id + " not found.");
+                    "Dog with id: " + id + " not found.");
         }
     }
 
 
     @Override
-    public DogDto update(int id, DogWeight dogDto) {
+    public DogDto updateDog(int id, DogWeight dogDto) {
         Optional<Dog> dog =  dogRepository.findById(id);
         if (dog.isPresent()) {
             Dog updatedDog = dog.get();
@@ -109,13 +113,13 @@ public class DogService implements Service{
         }
         else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    "Id " + id + " not found.");
+                    "Dog with id: " + id + " not found.");
         }
     }
 
 
     @Override
-    public DogDto update(int id, DogGender dogDto) {
+    public DogDto updateDog(int id, DogGender dogDto) {
         Optional<Dog> dog =  dogRepository.findById(id);
         if (dog.isPresent()) {
             Dog updatedDog = dog.get();
@@ -126,9 +130,26 @@ public class DogService implements Service{
         }
         else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    "Id " + id + " not found.");
+                    "Dog with id: " + id + " not found.");
         }
     }
+
+    @Override
+    public List<DogDto> getDogGender(String gender) {
+        return dogMapper.mapp(dogRepository.findAllByGender(gender));
+    }
+
+    @Override
+    public List<DogDto> getDogByName(String name) {
+        return dogMapper.mapp(dogRepository.findAllByName(name));
+    }
+
+    @Override
+    public List<DogDto> getDogByType(String type) {
+        return dogMapper.mapp(dogRepository.findAllByGender(type));
+    }
+
+
 }
 
 
