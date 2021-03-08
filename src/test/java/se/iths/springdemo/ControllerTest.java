@@ -15,20 +15,20 @@ class ControllerTest {
 
     @Test
     void callingOneWithValidIdReturnsOnePerson() {
-        DogController dogController = new DogController(new TestService());
+        DogController dogController = new DogController(new TestServiceInterface());
         var dog = dogController.one(1);
 
         // AssertJ fluent assertions
         assertThat(dog.getId()).isEqualTo(1);
         assertThat(dog.getName()).isEqualTo("Test");
         assertThat(dog.getType()).isEqualTo("Test");
-        assertThat(dog.getWeight()).isEqualTo(88);
+        assertThat(dog.getAge()).isEqualTo(88);
         assertThat(dog.getGender()).isEqualTo("Test");
     }
 
     @Test
     void callingOneWithNonValidIdReturnsExceptionWithResponseStatus404() {
-        DogController dogController = new DogController(new TestService());
+        DogController dogController = new DogController(new TestServiceInterface());
         //var person = personController.one(2L);
         var exception = assertThrows(ResponseStatusException.class,
                                                 () -> dogController.one(2));

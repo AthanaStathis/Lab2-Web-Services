@@ -2,16 +2,13 @@ package se.iths.springdemo;
 
 
 import se.iths.springdemo.dtos.DogDto;
-import se.iths.springdemo.entities.DogGender;
-import se.iths.springdemo.entities.DogName;
-import se.iths.springdemo.entities.DogType;
-import se.iths.springdemo.entities.DogWeight;
-import se.iths.springdemo.services.Service;
+import se.iths.springdemo.entities.DogAge;
+import se.iths.springdemo.services.ServiceInterface;
 
 import java.util.List;
 import java.util.Optional;
 
-public class TestService implements Service {
+public class TestServiceInterface implements ServiceInterface {
     @Override
     public List<DogDto> getAllDogs() {
         return null;
@@ -38,32 +35,12 @@ public class TestService implements Service {
     }
 
     @Override
-    public DogDto updateDog(int id, DogName dogDto) {
+    public DogDto updateDog(int i, DogAge dogDto) {
         return null;
     }
 
     @Override
-    public DogDto updateDog(int id, DogType dogDto) {
-        return null;
-    }
-
-    @Override
-    public DogDto updateDog(int i, DogWeight dogDto) {
-        return null;
-    }
-
-    @Override
-    public DogDto updateDog(int i, DogGender dogDto) {
-        return null;
-    }
-
-    @Override
-    public List<DogDto> getDogGender(String gender) {
-        return null;
-    }
-
-    @Override
-    public List<DogDto> getDogByName(String name) {
+    public List<DogDto> getDogByGender(String gender) {
         return null;
     }
 
@@ -71,6 +48,7 @@ public class TestService implements Service {
     public List<DogDto> getDogByType(String type) {
         return null;
     }
+
 
 /*
     @Override

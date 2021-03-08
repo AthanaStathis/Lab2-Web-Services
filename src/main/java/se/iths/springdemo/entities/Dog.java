@@ -12,17 +12,17 @@ public class Dog {
     private int id; // unique value - genereras av databasen
     private String name;
     private String type;
-    private double weight;
+    private int age;
     private String gender;
 
     public Dog() {
     }
 
-    public Dog(int id, String name, String type, double weight, String gender) {
+    public Dog(int id, String name, String type, int age, String gender) {
         this.id = id;
         this.name = name;
         this.type = type;
-        this.weight = weight;
+        this.age = age;
         this.gender = gender;
     }
 
@@ -50,12 +50,12 @@ public class Dog {
         this.type = type;
     }
 
-    public double getWeight() {
-        return weight;
+    public int getAge() {
+        return age;
     }
 
-    public void setWeight(double weight) {
-        this.weight = weight;
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getGender() {

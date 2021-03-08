@@ -1,6 +1,7 @@
 package se.iths.springdemo.services;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import se.iths.springdemo.entities.*;
 import se.iths.springdemo.mappers.DogMapper;
@@ -10,14 +11,15 @@ import se.iths.springdemo.dtos.DogDto;
 import java.util.List;
 import java.util.Optional;
 
-@org.springframework.stereotype.Service
-public class DogService implements Service{
+@Service
+public class DogService implements ServiceInterface {
 
-    private final DogMapper dogMapper = new DogMapper();
+    private DogMapper dogMapper = new DogMapper();
     private DogRepository dogRepository;
 
-    public DogService(DogRepository dogRepository) {
+    public DogService(DogRepository dogRepository, DogMapper dogMapper) {
         this.dogRepository = dogRepository;
+        this.dogMapper = dogMapper;
     }
 
 
@@ -70,13 +72,11 @@ public class DogService implements Service{
 
 
     @Override
-    public DogDto updateDog(int id, DogName dogDto) {
+    public DogDto updateDog(int id, DogAge dogDto) {
         Optional<Dog> dog =  dogRepository.findById(id);
         if (dog.isPresent()) {
             Dog updatedDog = dog.get();
-            if (dogDto.name != null)
-                updatedDog.setType(dogDto.name);
-            updatedDog.setName(dogDto.name);
+            updatedDog.setAge(dogDto.age);
             return dogMapper.mapp(dogRepository.save(updatedDog));
         }
         else {
@@ -86,62 +86,11 @@ public class DogService implements Service{
     }
 
 
-    @Override
-    public DogDto updateDog(int id, DogType dogDto) {
-        Optional<Dog> dog =  dogRepository.findById(id);
-        if (dog.isPresent()) {
-            Dog updatedDog = dog.get();
-            if (dogDto.type != null)
-                updatedDog.setType(dogDto.type);
-            updatedDog.setType(dogDto.type);
-            return dogMapper.mapp(dogRepository.save(updatedDog));
-        }
-        else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    "Dog with id: " + id + " not found.");
-        }
-    }
 
 
     @Override
-    public DogDto updateDog(int id, DogWeight dogDto) {
-        Optional<Dog> dog =  dogRepository.findById(id);
-        if (dog.isPresent()) {
-            Dog updatedDog = dog.get();
-            updatedDog.setWeight(dogDto.weight);
-            return dogMapper.mapp(dogRepository.save(updatedDog));
-        }
-        else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    "Dog with id: " + id + " not found.");
-        }
-    }
-
-
-    @Override
-    public DogDto updateDog(int id, DogGender dogDto) {
-        Optional<Dog> dog =  dogRepository.findById(id);
-        if (dog.isPresent()) {
-            Dog updatedDog = dog.get();
-            if (dogDto.gender != null)
-                updatedDog.setType(dogDto.gender);
-            updatedDog.setType(dogDto.gender);
-            return dogMapper.mapp(dogRepository.save(updatedDog));
-        }
-        else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    "Dog with id: " + id + " not found.");
-        }
-    }
-
-    @Override
-    public List<DogDto> getDogGender(String gender) {
+    public List<DogDto> getDogByGender(String gender) {
         return dogMapper.mapp(dogRepository.findAllByGender(gender));
-    }
-
-    @Override
-    public List<DogDto> getDogByName(String name) {
-        return dogMapper.mapp(dogRepository.findAllByName(name));
     }
 
     @Override
