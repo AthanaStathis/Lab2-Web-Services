@@ -45,9 +45,9 @@ public class MvcTest {
 
     @Test
     void SearchByType_ReturnsDogsOfSpecificType() throws Exception {
-        Mockito.when(service.getDogByType("dogtype")).thenReturn(List.of(new DogDto(1,"DogName","dogtype",
+        Mockito.when(service.getDogByType("DogType")).thenReturn(List.of(new DogDto(1,"DogName","DogType",
                 12, "DogGender")));
-        var result = mockMvc.perform(MockMvcRequestBuilders.get("/searchdog?type=dogtype")
+        var result = mockMvc.perform(MockMvcRequestBuilders.get("/searchdog?type=DogType")
                 .accept(MediaType.APPLICATION_JSON)).andReturn();
 
         assertThat(result.getResponse().getStatus()).isEqualTo(200);
@@ -56,9 +56,9 @@ public class MvcTest {
 
     @Test
     void SearchByGender_ReturnsDogsOfSpecificGender() throws Exception {
-        Mockito.when(service.getDogByType("doggender")).thenReturn(List.of(new DogDto(1,"DogName","DogType",
-                12, "doggender")));
-        var result = mockMvc.perform(MockMvcRequestBuilders.get("/searchdog?gender=doggender")
+        Mockito.when(service.getDogByType("DogGender")).thenReturn(List.of(new DogDto(1,"DogName","DogType",
+                12, "DogGender")));
+        var result = mockMvc.perform(MockMvcRequestBuilders.get("/searchdog?gender=DogGender")
                 .accept(MediaType.APPLICATION_JSON)).andReturn();
 
         assertThat(result.getResponse().getStatus()).isEqualTo(200);

@@ -95,7 +95,7 @@ public class DogService implements ServiceInterface {
 
     @Override
     public List<DogDto> getDogByType(String type) {
-        return dogMapper.mapp(dogRepository.findAllByGender(type));
+        return dogMapper.mapp(dogRepository.findAllByType(type));
     }
 
 
