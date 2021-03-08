@@ -62,12 +62,6 @@ public class DogController {
     }
 
 
-//    @PatchMapping(value = "/dogs/{id}", params = "name")
-//    public DogDto update(@RequestBody DogName dogName, @PathVariable int id) {
-//        return service.updateDog(id, dogName);
-//    }
-
-
     @GetMapping(value = "/searchdog", params = "type")
     public List<DogDto> searchByType(@RequestParam String type) {
         return serviceInterface.getDogByType(type);
