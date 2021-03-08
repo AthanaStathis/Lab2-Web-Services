@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface DogRepository extends JpaRepository<Dog, Integer> {
-    // Hanterar koppling mot en databas
+
     List<Dog> findAllByName(String name);
 
     List<Dog> findAllByGender(String gender);

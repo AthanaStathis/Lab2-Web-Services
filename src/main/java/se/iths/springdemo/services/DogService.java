@@ -14,7 +14,7 @@ import java.util.Optional;
 @Service
 public class DogService implements ServiceInterface {
 
-    private DogMapper dogMapper = new DogMapper();
+    private DogMapper dogMapper;
     private DogRepository dogRepository;
 
     public DogService(DogRepository dogRepository, DogMapper dogMapper) {
@@ -31,7 +31,6 @@ public class DogService implements ServiceInterface {
 
     @Override
     public Optional<DogDto> getOneDog(int id) {
-        //return personRepository.findById(id);
         return dogMapper.mapp(dogRepository.findById(id));
     }
 
@@ -72,11 +71,11 @@ public class DogService implements ServiceInterface {
 
 
     @Override
-    public DogDto updateDog(int id, DogAge dogDto) {
+    public DogDto updateDog(int id, DogAge dogAge) {
         Optional<Dog> dog =  dogRepository.findById(id);
         if (dog.isPresent()) {
             Dog updatedDog = dog.get();
-            updatedDog.setAge(dogDto.age);
+            updatedDog.setAge(dogAge.age);
             return dogMapper.mapp(dogRepository.save(updatedDog));
         }
         else {
